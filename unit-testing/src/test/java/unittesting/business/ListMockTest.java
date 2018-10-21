@@ -105,7 +105,7 @@ public class ListMockTest {
     }
 
     @Test
-    public void spying(){
+    public void mockingBase(){
 
         ArrayList arrayListMock = mock(ArrayList.class);
 
@@ -120,5 +120,29 @@ public class ListMockTest {
         System.out.println("After manual set to 5: " + arrayListMock.size()); // 5
 
         // arrayListMock.add("Test2");
+    }
+
+    @Test
+    public void spyingBase(){
+
+        // Spy retains original behavior of teh class is retained
+        ArrayList arrayListMock = spy(ArrayList.class);
+        System.out.println(arrayListMock.add("Test0"));
+
+        System.out.println(arrayListMock.get(0));
+        System.out.println(arrayListMock.size()); // 1
+
+        System.out.println(arrayListMock.add("Test1"));
+        System.out.println(arrayListMock.add("Test2"));
+        System.out.println("After 2 more additions to the mock: " + arrayListMock.size()); // 3
+
+        // You are taking control here
+        when(arrayListMock.size()).thenReturn(5);
+        System.out.println("After manual set to 5: " + arrayListMock.size()); // 5
+
+        System.out.println(arrayListMock.add("Test4"));
+        System.out.println("After manual set to 5 and ADD another item: " + arrayListMock.size()); // 5
+
+        verify(arrayListMock).add("Test4");
     }
 }
