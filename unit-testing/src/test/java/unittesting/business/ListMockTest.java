@@ -86,4 +86,20 @@ public class ListMockTest {
     }
 
 
+    // Say suppose you want to fin out the specific value passed on a mock
+    @Test
+    public void argumentCaptureMultiple(){
+
+        // System Under Test
+        mock.add("SomeString1");
+        mock.add("SomeString2");
+
+        // Verify that the get method id called on the mock
+        ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        verify(mock, times(2)).add(captor.capture());
+
+        // Test the value that was captured
+        Assert.assertEquals("SomeString1", captor.getAllValues().get(0));
+        Assert.assertEquals("SomeString2", captor.getAllValues().get(1));
+    }
 }
