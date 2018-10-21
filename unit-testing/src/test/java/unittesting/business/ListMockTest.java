@@ -2,6 +2,7 @@ package unittesting.business;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 
 import java.util.List;
 
@@ -68,5 +69,21 @@ public class ListMockTest {
         // See that get 3 is never called
         verify(mock, never()).get(3);
     }
+
+    // Say suppose you want to fin out the specific value passed on a mock
+    @Test
+    public void argumentCapture(){
+
+        // System Under Test
+        mock.add("SomeString");
+
+        // Verify that the get method id called on the mock
+        ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        verify(mock).add(captor.capture());
+
+        // Test the value that was captured
+        Assert.assertEquals("SomeString", captor.getValue());
+    }
+
 
 }
