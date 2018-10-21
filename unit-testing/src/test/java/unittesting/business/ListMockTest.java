@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
@@ -101,5 +102,23 @@ public class ListMockTest {
         // Test the value that was captured
         Assert.assertEquals("SomeString1", captor.getAllValues().get(0));
         Assert.assertEquals("SomeString2", captor.getAllValues().get(1));
+    }
+
+    @Test
+    public void spying(){
+
+        ArrayList arrayListMock = mock(ArrayList.class);
+
+        System.out.println(arrayListMock.get(0)); // null
+        System.out.println(arrayListMock.size()); // 0
+
+        System.out.println(arrayListMock.add("Test"));
+        System.out.println(arrayListMock.add("Test2"));
+        System.out.println("After 2 additions to the mock: " + arrayListMock.size()); // 0
+
+        when(arrayListMock.size()).thenReturn(5);
+        System.out.println("After manual set to 5: " + arrayListMock.size()); // 5
+
+        // arrayListMock.add("Test2");
     }
 }
