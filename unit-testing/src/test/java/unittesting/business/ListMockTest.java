@@ -28,6 +28,7 @@ public class ListMockTest {
         Assert.assertEquals(10, mock.size());
     }
 
+    // If a specific item is called on the list
     @Test
     public void returnWithParameters() {
         when(mock.get(0)).thenReturn("0 element");
@@ -39,6 +40,14 @@ public class ListMockTest {
         Assert.assertEquals(null, mock.get(10));
     }
 
+    // If any item is called on the list
+    @Test
+    public void returnWithGenericParameters() {
+        when(mock.get(anyInt())).thenReturn("Any element");
+        Assert.assertEquals("Any element", mock.get(0));
+        Assert.assertEquals("Any element", mock.get(1));
+        Assert.assertEquals("Any element", mock.get(100));
+    }
 
 
 }
