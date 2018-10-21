@@ -64,6 +64,9 @@ public class ListMockTest {
         // Verify that it was called only 2 time or at most 2 times
         verify(mock, times(2)).get(anyInt());
         verify(mock, atMost(2)).get(anyInt());
+
+        // See that get 3 is never called
+        verify(mock, never()).get(3);
     }
 
 }
