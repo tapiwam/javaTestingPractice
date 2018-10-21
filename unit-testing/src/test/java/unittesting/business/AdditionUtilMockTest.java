@@ -1,28 +1,28 @@
 package unittesting.business;
 
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 import unittesting.data.INumDataService;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-//@AutoConfigureMockMvc
+@RunWith(value = MockitoJUnitRunner.class)
 public class AdditionUtilMockTest {
 
+    @InjectMocks
     AdditionUtil additionUtil = new AdditionUtil();
-    INumDataService numDataServiceMock = mock(INumDataService.class);
 
-    @Before
-    public void before(){
-        additionUtil.setNumDataService(numDataServiceMock);
-    }
+    @Mock
+    INumDataService numDataServiceMock;
 
     @Test
     public void sum() {
         when(numDataServiceMock.getIntArray()).thenReturn(new int[] {1,4,5});
-
+        assertEquals(10, additionUtil.sumUsingService());
     }
 
     @Test
