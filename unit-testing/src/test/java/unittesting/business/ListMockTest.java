@@ -35,6 +35,8 @@ public class ListMockTest {
 
         // This will fail as all other elements are null -> the "default". Only "0" is mapped
         // --> Assert.assertEquals("0 element", mock.get(1));
+        Assert.assertEquals(null, mock.get(1));
+        Assert.assertEquals(null, mock.get(10));
     }
 
 
