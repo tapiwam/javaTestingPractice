@@ -36,4 +36,5 @@ public class AdditionUtilMockTest {
         when(numDataServiceMock.getIntArray()).thenReturn(new int[] {5});
         assertEquals(5, additionUtil.sumUsingService());
     }
+
 }

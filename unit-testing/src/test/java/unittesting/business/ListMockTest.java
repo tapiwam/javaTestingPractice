@@ -9,7 +9,7 @@ import static org.mockito.Mockito.*;
 
 public class ListMockTest {
 
-    List mock = mock(List.class);
+    List<String> mock = mock(List.class);
 
     @Test
     public void testBasic() {
@@ -43,11 +43,27 @@ public class ListMockTest {
     // If any item is called on the list
     @Test
     public void returnWithGenericParameters() {
+        // anyInt() acts as an argument matcher
+
         when(mock.get(anyInt())).thenReturn("Any element");
         Assert.assertEquals("Any element", mock.get(0));
         Assert.assertEquals("Any element", mock.get(1));
         Assert.assertEquals("Any element", mock.get(100));
     }
 
+    @Test
+    public void verificationBasics(){
+
+        // System Under Test
+        String value1 = mock.get(0);
+        String value2 = mock.get(1);
+
+        // Verify that the get method id called on the mock
+        verify(mock).get(0);
+
+        // Verify that it was called only 2 time or at most 2 times
+        verify(mock, times(2)).get(anyInt());
+        verify(mock, atMost(2)).get(anyInt());
+    }
 
 }
